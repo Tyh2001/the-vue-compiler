@@ -20,7 +20,8 @@ function tokenizer (input) {
       } else {
         type = 'tagstart'
       }
-    } if (ch === '>') {
+    }
+    if (ch === '>') {
       push()
       type = "text"
       // continue语句的作用是跳过本次循环体中余下尚未执行的语句
@@ -37,7 +38,7 @@ function tokenizer (input) {
 
   function push () {
     if (val) {
-      console.log(val)
+      console.log(val, '----')
       if (type === "tagstart") val = val.slice(1) // <div => div
       if (type === "tagend") val = val.slice(2)   //  </div  => div
       tokens.push({
@@ -54,7 +55,7 @@ function tokenizer (input) {
  * @param {*} template 
  * @returns 
  */
-function parse (template) {
+function parser (template) {
   const tokens = tokenizer(template)
   let cur = 0
   let ast = {
@@ -204,7 +205,7 @@ export function render(_ctx, _cache, $props){
 }
 
 function compiler (template) {
-  const ast = parse(template)
+  const ast = parser(template)
   console.log(ast)
   // console.log(JSON.stringify(ast, null, 2))
   transform(ast)
@@ -220,8 +221,10 @@ function compiler (template) {
 //   </div>
 // `
 
-let tmpl = `
-    <h1 class="item">技术摸鱼</h1>
-`
+// let tmpl = `
+//     <h1 class="item">技术摸鱼</h1>
+// `
 
-compiler(tmpl)
+// compiler(tmpl)
+
+console.log(tokenizer(`<h1 class="item">技术摸鱼</h1>`))
