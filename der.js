@@ -211,6 +211,7 @@ function compiler (template) {
   transform(ast)
   const code = generate(ast)
   // console.log(code)
+  return code
   // return new Function(code);
 }
 
@@ -221,10 +222,10 @@ function compiler (template) {
 //   </div>
 // `
 
-// let tmpl = `
-//     <h1 class="item">技术摸鱼</h1>
-// `
+let tmpl = `
+    <h1 class="item">技术摸鱼</h1>
+`
 
-// compiler(tmpl)
+console.log(compiler(tmpl))
 
-console.log(tokenizer(`<h1 class="item">技术摸鱼</h1>`))
+// console.log(tokenizer(`<h1 class="item">技术摸鱼</h1>`))
